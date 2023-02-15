@@ -2,15 +2,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
-
 import torchvision
 import torchvision.datasets
 import torchvision.transforms as transforms
-
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-white")
-
 
 # 전처리 설정
 transform = transforms.Compose([transforms.ToTensor(),
@@ -29,19 +26,18 @@ print(imgs.shape)
 print(labels.shape)
 
 # 데이터 확인
-# plt.figure(figsize=(10,15))
-# for i in range(32):
-#     plt.subplot(4,8,i+1)
-#     plt.imshow(imgs[i,:,:,:].resize(28,28))
-#     plt.title(labels[i].item())
-#     plt.axis("off")
-# plt.show()
+plt.figure(figsize=(10,15))
+for i in range(32):
+    plt.subplot(4,8,i+1)
+    plt.imshow(imgs[i,:,:,:].resize(28,28))
+    plt.title(labels[i].item())
+    plt.axis("off")
+plt.show()
 
 # 신경망 구성
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        
         self.conv1 = nn.Conv2d(1, 6, 3)
         self.conv2 = nn.Conv2d(6, 16, 3)
         self.fc1 = nn.Linear(16*5*5, 120)
